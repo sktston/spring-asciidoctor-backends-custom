@@ -26,11 +26,11 @@
 }
 
 #logo-link {
-  display: block;
-  position: absolute;
-  top: var(--layout-banner-logo-offset);
-  left: var(--layout-banner-logo-offset);
+  display: inline-block;
   height: var(--layout-banner-logo-height);
+  left: var(--layout-banner-logo-offset);
+  position: relative;
+  top: var(--layout-banner-logo-offset);
 }
 
 #logo-image {
