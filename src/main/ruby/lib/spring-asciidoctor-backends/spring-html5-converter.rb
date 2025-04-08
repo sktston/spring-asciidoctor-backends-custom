@@ -144,7 +144,7 @@ class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
       swagger_href = node.attr "swagger-link"
       outline = %(<span id="back-to-index"><a href="#{index_href}">Back to index</a></span>) + outline
       if swagger_href != nil
-        outline = outline + %(<span id="swagger"><a href="#{swagger_href}" target="_blank">Swagger (Open API Spec)</a></span>)
+        outline = outline + %(<span id="swagger"><a href="#{swagger_href}" target="_blank">Swagger (OpenAPI)</a></span>)
       end
     end
     return outline
