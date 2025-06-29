@@ -42,10 +42,4 @@ public class FontAwesomeIntegrationTests {
 		assertThat(html.toString()).contains(ICON_TEXT);
 	}
 
-	@Test
-	void fontAwesomeCssIsNotIncludedByDefault(@Source("NoFontAwesome.adoc") ConvertedHtml html) {
-		assertThat(html.toString()).doesNotContain(CSS_LINK);
-		assertThat(html.toString()).contains(ICON_TEXT);
-	}
-
 }

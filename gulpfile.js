@@ -82,12 +82,32 @@ function jsFolder(name) {
 }
 
 function tapBrowserify() {
+  // return tap(function (file) {
+  //   file.contents = browserify(file.path, {
+  //     debug: true,
+  //   })
+  //     .plugin("browser-pack-flat/plugin")
+  //     .bundle();
+  // });
   return tap(function (file) {
     file.contents = browserify(file.path, {
       debug: true,
     })
-      .plugin("browser-pack-flat/plugin")
-      .bundle();
+    .transform('babelify', {
+      presets: [
+        ['@babel/preset-env', {
+          targets: {
+            browsers: ['> 1%', 'last 2 versions']
+          }
+        }]
+      ],
+      plugins: [
+        '@babel/plugin-proposal-optional-chaining',
+        '@babel/plugin-proposal-nullish-coalescing-operator'
+      ]
+    })
+    .plugin("browser-pack-flat/plugin")
+    .bundle();
   });
 }
 

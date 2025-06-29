@@ -17,6 +17,7 @@
 
 require_relative "spring-asciidoctor-backends/spring-docinfo-processor"
 require_relative "spring-asciidoctor-backends/spring-html5-converter"
+require_relative "spring-asciidoctor-backends/skt-custom-footer-processor"
 
 begin
   require_relative "spring-asciidoctor-backends/spring-pdf-converter"

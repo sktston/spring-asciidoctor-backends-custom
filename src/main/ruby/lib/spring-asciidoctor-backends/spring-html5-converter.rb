@@ -64,16 +64,14 @@ class SpringHtml5Converter
     node.set_attr "stylesdir", "css"
     node.set_attr "stylesheet", "site.css"
     node.set_attr "icons", "font"
+    node.set_attr "nofooter"
+    node.set_attr "no-details"
     node.remove_attr "iconfont-remote"
     node.remove_attr "copycss"
   end
 
   def postprocess(node, html)
-    if node.attr? 'iconfont-fontawesome'
-      html = html.gsub(/<link\ rel="stylesheet"(?!.*(site|font-awesome)\.css).*>\R?/, "")
-    else
-      html = html.gsub(/<link\ rel="stylesheet"(?!.*site\.css).*>\R?/, "")
-    end
+    html = html.gsub(/<link\ rel="stylesheet"(?!.*(site|font-awesome)\.css).*>\R?/, "")
 
     # Remove <div class="details">...</div> if 'no-details' attribute is set
     if node.attr? 'no-details'
