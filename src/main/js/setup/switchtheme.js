@@ -25,20 +25,21 @@
     "(prefers-color-scheme: dark)"
   );
 
-  swithInitialTheme();
-  window.addEventListener("load", onWindowLoad);
+  switchInitialTheme();
+  window.addEventListener("DOMContentLoaded", onDOMContentLoaded);
 
-  function swithInitialTheme() {
+  function switchInitialTheme() {
     if (isInitialThemeDark()) {
       htmlElement.classList.add("dark-theme");
     }
   }
 
-  function onWindowLoad() {
+  function onDOMContentLoaded() {
     const toggleCheckboxElement = document.querySelector(
       "#switch-theme-checkbox"
     );
     toggleCheckboxElement.checked = isInitialThemeDark();
+    toggleCheckboxElement.classList.remove("hidden");
     toggleCheckboxElement.addEventListener(
       "change",
       onThemeChange.bind(toggleCheckboxElement)
@@ -51,6 +52,9 @@
   }
 
   function onThemeChange() {
+    // Remove no-transitions class to enable animation for user interaction
+    htmlElement.classList.remove("no-transitions");
+
     if (this.checked) {
       delay(function () {
         htmlElement.classList.add("dark-theme");

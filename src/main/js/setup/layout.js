@@ -16,5 +16,5 @@
 
 (function () {
   "use strict";
-  document.getElementsByTagName("html")[0].classList.add("js");
+  document.getElementsByTagName("html")[0].classList.add("js", "no-transitions");
 })();
