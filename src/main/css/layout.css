@@ -60,6 +60,10 @@ html.js div#switch-theme {
   margin: 8px 6px 0 0;
 }
 
+.no-transitions #switch-theme input::before {
+  transition: none !important;
+}
+
 #switch-theme input {
   appearance: none;
   position: relative;
