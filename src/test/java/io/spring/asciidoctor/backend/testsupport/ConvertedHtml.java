@@ -107,9 +107,8 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 		}
 		driver.get(url);
 		LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
-		List<LogEntry> nonIgnorable = logs.getAll().stream()
-			.filter(entry -> !isIgnorable(entry))
-			.collect(Collectors.toList());
+		List<LogEntry> nonIgnorable = logs.getAll().stream().filter(entry -> !isIgnorable(entry))
+				.collect(Collectors.toList());
 		logChecks.accept(new LogEntries(nonIgnorable));
 		return driver;
 	}
@@ -142,11 +141,9 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 
 	private boolean isIgnorable(LogEntry entry) {
 		String message = entry.getMessage();
-		return message.contains("highlightBlock will be removed") ||
-			message.contains("highlightElement now") ||
-			message.contains("fontawesome-webfont") ||
-			message.contains("LocalTOC") ||
-			entry.getLevel() == Level.FINE; // You may also ignore INFO logs completely
+		return message.contains("highlightBlock will be removed") || message.contains("highlightElement now")
+				|| message.contains("fontawesome-webfont") || message.contains("LocalTOC")
+				|| entry.getLevel() == Level.FINE;
 	}
 
 }
