@@ -21,9 +21,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.AssertProvider;
 import org.assertj.core.api.Assertions;
@@ -31,6 +33,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.images.builder.Transferable;
@@ -103,7 +106,11 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 			url = url + "#" + anchor;
 		}
 		driver.get(url);
-		logChecks.accept(driver.manage().logs().get(LogType.BROWSER));
+		LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
+		List<LogEntry> nonIgnorable = logs.getAll().stream()
+			.filter(entry -> !isIgnorable(entry))
+			.collect(Collectors.toList());
+		logChecks.accept(new LogEntries(nonIgnorable));
 		return driver;
 	}
 
@@ -131,6 +138,15 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		Files.copy(path, out);
 		return new String(out.toByteArray(), StandardCharsets.UTF_8);
+	}
+
+	private boolean isIgnorable(LogEntry entry) {
+		String message = entry.getMessage();
+		return message.contains("highlightBlock will be removed") ||
+			message.contains("highlightElement now") ||
+			message.contains("fontawesome-webfont") ||
+			message.contains("LocalTOC") ||
+			entry.getLevel() == Level.FINE; // You may also ignore INFO logs completely
 	}
 
 }

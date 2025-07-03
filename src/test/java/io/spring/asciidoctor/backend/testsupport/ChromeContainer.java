@@ -40,7 +40,7 @@ public class ChromeContainer extends BrowserWebDriverContainer<ChromeContainer> 
 		ChromeOptions chromeOptions = new ChromeOptions();
 		LoggingPreferences loggingPreferences = new LoggingPreferences();
 		loggingPreferences.enable(LogType.BROWSER, Level.ALL);
-		chromeOptions.setCapability(CapabilityType.LOGGING_PREFS, loggingPreferences);
+		chromeOptions.setCapability("goog:loggingPrefs", loggingPreferences);
 		return chromeOptions;
 	}
 

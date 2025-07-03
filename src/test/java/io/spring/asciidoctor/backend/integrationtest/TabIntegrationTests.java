@@ -53,7 +53,7 @@ public class TabIntegrationTests {
 	@Test
 	void singleTabIsCreated(@Source("singleTab.adoc") ConvertedHtml html) throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(1);
 		assertThatTabs(listings.get(0)).hasSelected("Alpha").hasUnselected("Bravo")
 				.hasDisplayedContentContaining("Alpha 1");
@@ -63,7 +63,7 @@ public class TabIntegrationTests {
 	void multipleTabsWithSameOptionsAreCreated(@Source("multipleTabsSameOptions.adoc") ConvertedHtml html)
 			throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(2).allSatisfy((element) -> assertThatTabs(element).hasSelected("Alpha")
 				.hasUnselected("Bravo").hasDisplayedContentContaining("Alpha"));
 	}
@@ -72,7 +72,7 @@ public class TabIntegrationTests {
 	void multipleTabsWithDifferentOptionsAreCreated(@Source("multipleTabsDifferentOptions.adoc") ConvertedHtml html)
 			throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(2);
 		assertThatTabs(listings.get(0)).hasSelected("Alpha").hasUnselected("Bravo")
 				.hasDisplayedContentContaining("Alpha");
@@ -85,7 +85,7 @@ public class TabIntegrationTests {
 			@Source("singleSwitchWithCallouts.adoc") ConvertedHtml html) throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
 		assertThat(driver.manage().logs().get(LogType.BROWSER)).isEmpty();
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(1);
 		assertThatTabs(listings.get(0)).hasSelected("Alpha").hasUnselected("Bravo")
 				.hasDisplayedContentContaining("Alpha 1").hasDisplayedCalloutListContaining("Alpha callout")
@@ -97,7 +97,7 @@ public class TabIntegrationTests {
 	void givenASingleTabWhenUnselectedItemIsClickedThenItBecomesSelected(@Source("singleTab.adoc") ConvertedHtml html)
 			throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(1);
 		assertThatTabs(listings.get(0)).hasSelected("Alpha").hasUnselected("Bravo")
 				.hasDisplayedContentContaining("Alpha 1").uponClicking("Bravo").hasSelected("Bravo")
@@ -108,7 +108,7 @@ public class TabIntegrationTests {
 	void givenMultipleTabsWithTheSameOptionsWhenUnselectedItemIsClickedThenItBecomesSelected(
 			@Source("multipleTabsSameOptions.adoc") ConvertedHtml html) throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(2);
 		assertThatTabs(listings.get(1)).hasSelected("Alpha").hasUnselected("Bravo")
 				.hasDisplayedContentContaining("Alpha 2");
@@ -123,7 +123,7 @@ public class TabIntegrationTests {
 	void givenMultipleTabsWithDifferentOptionsWhenUnselectedItemIsClickedThenItBecomesSelected(
 			@Source("multipleTabsDifferentOptions.adoc") ConvertedHtml html) throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(listings).hasSize(2);
 		assertThatTabs(listings.get(1)).hasSelected("Charlie").hasUnselected("Delta", "Echo")
 				.hasDisplayedContentContaining("Charlie 1");
@@ -142,16 +142,16 @@ public class TabIntegrationTests {
 			assertThat(logs.iterator().next().getMessage())
 					.endsWith("\"Found secondary block with no primary sibling\"");
 		});
-		List<WebElement> primaries = driver.findElementsByCssSelector(".listingblock.primary");
+		List<WebElement> primaries = driver.findElements(By.cssSelector(".listingblock.primary"));
 		assertThat(primaries).hasSize(0);
-		List<WebElement> secondaries = driver.findElementsByCssSelector(".listingblock.secondary");
+		List<WebElement> secondaries = driver.findElements(By.cssSelector(".listingblock.secondary"));
 		assertThat(secondaries).hasSize(1);
 	}
 
 	@Test
 	void tabsWithAndWithoutCallouts(@Source("tabsWithAndWithoutCallouts.adoc") ConvertedHtml html) throws IOException {
 		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
-		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock");
+		List<WebElement> listings = driver.findElements(By.cssSelector(".listingblock"));
 		assertThat(listings).hasSize(3);
 		assertThatTabs(listings.get(0)).hasNoCalloutList();
 		assertThatTabs(listings.get(2)).hasDisplayedCalloutListContaining("Callout for tab one");
