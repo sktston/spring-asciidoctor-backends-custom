@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
   zoomOverlay.id = "zoomOverlay";
   document.body.insertBefore(zoomOverlay, document.body.firstChild);
 
-  // Add zoomable-image class to all images (or specific selector)
-  const images = document.querySelectorAll("img");
+  // Add zoomable-image class to images in the content only
+  const images = document.querySelectorAll("#content img");
   images.forEach((img) => {
     img.classList.add("zoomable-image");
   });
