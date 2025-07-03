@@ -26,6 +26,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.AssertProvider;
 import org.assertj.core.api.Assertions;
@@ -107,7 +108,7 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 		}
 		driver.get(url);
 		LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
-		List<LogEntry> nonIgnorable = logs.getAll().stream().filter(entry -> !isIgnorable(entry))
+		List<LogEntry> nonIgnorable = logs.getAll().stream().filter((entry) -> !isIgnorable(entry))
 				.collect(Collectors.toList());
 		logChecks.accept(new LogEntries(nonIgnorable));
 		return driver;
