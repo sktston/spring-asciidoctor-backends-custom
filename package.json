@@ -44,6 +44,8 @@
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
-    "fontawesome-4.7": "^4.7.0"
+    "fontawesome-4.7": "^4.7.0",
+    "lunr": "^2.3.9",
+    "lunr-languages": "^1.10.0"
   }
 }

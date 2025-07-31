@@ -60,4 +60,7 @@ html.dark-theme {
   --codetools-hover-background-color: var(--color-accent-1-invert);
   --codetools-border-color: rgba(255, 255, 255, 0.274);
   --codetools-divider-color: rgba(44, 44, 44, 0.274);
+
+  /* Custom */
+  --shadow-color: rgba(0, 0, 0, 0.6);
 }
