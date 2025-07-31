@@ -144,6 +144,8 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 		String message = entry.getMessage();
 		return message.contains("highlightBlock will be removed") || message.contains("highlightElement now")
 				|| message.contains("fontawesome-webfont") || message.contains("LocalTOC")
+				|| message.contains("Search index not loaded or not available")
+				|| message.contains("search-bundle.min.json")
 				|| entry.getLevel() == Level.FINE;
 	}
 
