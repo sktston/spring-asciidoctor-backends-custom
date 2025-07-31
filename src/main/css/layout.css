@@ -16,7 +16,6 @@
 
 #banner-container {
   height: var(--layout-banner-height);
-  overflow: hidden;
   border-bottom: 1px solid var(--layout-border-color);
 }
 

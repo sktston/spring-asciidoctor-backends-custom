@@ -154,6 +154,9 @@
   --codetools-divider-color: var(--codetools-border-color);
   --codetools-popup-background-color: var(--selected-background-color);
   --codetools-popup-font-color: var(--body-background-color);
+
+  /* Custom */
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Overrides */
