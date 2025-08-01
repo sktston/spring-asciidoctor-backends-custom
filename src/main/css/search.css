@@ -32,6 +32,21 @@
     max-height: calc(100vh - 8rem);
     z-index: 100;
   }
+
+  #search-field {
+    margin: 0 4px 0 0 !important;
+  }
+
+  #search-input {
+    transition: width 0.25s ease;
+    padding: 0.4em 0.2em 0.4em 28px !important;
+    width: 10px !important;
+  }
+
+  #search-input:focus {
+    width: calc(100vw - 6rem) !important;
+    z-index: 1002;
+  }
 }
 
 .search-result-dataset {
