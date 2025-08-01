@@ -19,7 +19,7 @@
   const modifierKey = isMacClient() ? "⌘" : "Ctrl";
   document.getElementById(
     "search-input"
-  ).placeholder = `Search…      (${modifierKey}K)`;
+  ).placeholder = `Search…    (${modifierKey}K)`;
 
   // Utils
   function highlight(text, term) {
@@ -162,6 +162,30 @@
       input?.focus();
     }
   });
+
+  function relocateSearchField() {
+    const searchField = document.getElementById("search-field");
+    const banner = document.getElementById("banner");
+    const tocbarContainer = document.getElementById("tocbar-container");
+    const tocbar = document.getElementById("tocbar");
+
+    if (!searchField || !banner || !tocbarContainer || !tocbar) return;
+
+    const isMobile = window.innerWidth < 800;
+
+    if (
+      isMobile &&
+      tocbarContainer.contains(tocbar) &&
+      searchField.parentElement !== tocbarContainer
+    ) {
+      tocbar.insertAdjacentElement("afterend", searchField);
+    } else if (!isMobile && searchField.parentElement !== banner) {
+      banner.appendChild(searchField);
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", relocateSearchField);
+  window.addEventListener("resize", relocateSearchField);
 
   // Load index JSON
   fetch(siteRootPath + "search/search-bundle.min.json")
