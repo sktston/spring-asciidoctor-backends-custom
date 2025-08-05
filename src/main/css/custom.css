@@ -901,8 +901,7 @@ body #doc {
 
 .copy-toast {
   position: fixed;
-  top: 10rem;
-  bottom: unset;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -912,17 +911,12 @@ body #doc {
   font-size: 0.9rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease-in-out;
   z-index: 9999;
 }
 
-html.dark-theme .copy-toast {
-  background-color: white;
-  color: #333;
-}
-
 .copy-toast.visible {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .ask-ai-container {

@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
   copyBtn?.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(baseUrl);
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        return;
+      }
       showToast("주소가 복사되었습니다.");
     } catch (e) {
       console.warn("Copy failed", e);
@@ -42,9 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(toast);
 
     setTimeout(() => {
+      toast.classList.add("visible");
+    }, 0);
+
+    setTimeout(() => {
       toast.classList.remove("visible");
       setTimeout(() => toast.remove(), 300);
-    }, 1500);
+    }, 3000);
   }
 
   // Share button
