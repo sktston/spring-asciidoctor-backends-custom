@@ -1108,6 +1108,10 @@ body.zoom-active {
     font-size: 0.875rem;
   }
 
+  .doc .admonitionblock {
+    margin: 1rem 0.09375rem;
+  }
+
   .doc .admonitionblock td.content,
   .doc .listingblock pre:not(.highlight),
   .doc .literalblock pre,
